@@ -14,10 +14,9 @@
 ;;; of the function is the reversed version of L. Every single sub-list in L
 ;;; should be reversed as well. For example, the result of
 ;;; (reverse-general ‘(a b (c (d e)) f) should be (f ((e d) c) b a).
-
 (define (reverse-general L)
   (cond
     ((NULL? L) '())
-    (else (CONS (reverse-general (CDR L)) (CAR L)))
+    (else (append (reverse-general (CDR L)) (List (car L))))
     )
   )
