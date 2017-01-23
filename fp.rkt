@@ -17,6 +17,21 @@
 (define (reverse-general L)
   (cond
     ((NULL? L) '())
-    (else (append (reverse-general (CDR L)) (List (car L))))
+    (else (append (reverse-general (CDR L)) ((lambda(x)
+                                               (if (not (LIST? x))
+                                                 (begin
+                                                   (Display "h ") ;; displays when first char is not a list
+                                                   (LIST x)) ;; return
+                                                 (reverse-general x)
+                                                 )
+                                               ) (CAR L))
+                  ))
     )
   )
+
+(reverse-general '(a b c))
+(reverse-general '(a b ()))
+(reverse-general '((a b c)))
+
+
+
