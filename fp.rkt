@@ -12,9 +12,7 @@
     ((NULL? L) '())
     (else (append (reverse-general (CDR L)) ((lambda(x)
                                                (if (LIST? x)
-                                                 (begin
-                                                   (Display "hello world") ;; displays
-                                                   (LIST (reverse-general x)));; return
+                                                 (LIST (reverse-general x));; return
                                                  (list x)
                                                  )
                                                ) (CAR L))
@@ -22,17 +20,6 @@
     )
   )
 
-(reverse-general '(a b c))
-(reverse-general '(a b ()))
-(reverse-general '((a b c)))
-(reverse-general '((a b c) (d e f)))
-(reverse-general '(a (b c) ((d e) f) g))
-(reverse-general '(1 (2 3) (4 (a (b (c d))))))
-
-
-(reverse-general '(a b c))
-(reverse-general '(a b ()))
-(reverse-general '((a b c)))
 
 
 
