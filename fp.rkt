@@ -2,13 +2,6 @@
 ;;; edu) as part of an assignment for CSCI 350: Structures of Programming
 ;;; Language at Howard University.
 
-(define (nmember atm lis)
-  (cond
-    ((NULL? lis) #F) ;; empty list
-    ((EQ? atm (CAR lis)) #T)
-    (ELSE (nmember atm (CDR lis)))
-    )
-  )
 
 ;;; 1. (25 pts) Write a function (reverse-general L). L is a list. The result
 ;;; of the function is the reversed version of L. Every single sub-list in L
@@ -18,16 +11,24 @@
   (cond
     ((NULL? L) '())
     (else (append (reverse-general (CDR L)) ((lambda(x)
-                                               (if (not (LIST? x))
+                                               (if (LIST? x)
                                                  (begin
-                                                   (Display "h ") ;; displays when first char is not a list
-                                                   (LIST x)) ;; return
-                                                 (reverse-general x)
+                                                   (Display "hello world") ;; displays
+                                                   (LIST (reverse-general x)));; return
+                                                 (list x)
                                                  )
                                                ) (CAR L))
                   ))
     )
   )
+
+(reverse-general '(a b c))
+(reverse-general '(a b ()))
+(reverse-general '((a b c)))
+(reverse-general '((a b c) (d e f)))
+(reverse-general '(a (b c) ((d e) f) g))
+(reverse-general '(1 (2 3) (4 (a (b (c d))))))
+
 
 (reverse-general '(a b c))
 (reverse-general '(a b ()))
