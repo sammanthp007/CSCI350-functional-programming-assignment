@@ -20,6 +20,7 @@
     )
   )
 
+;(reverse-general '(a b c (d e f) g h))
 
 
 ;;; (25 pts) Write a function (sum-up-numbers-simple L). L is a list, which
@@ -61,4 +62,15 @@
 ;;; there are no such numbers, the result is zero. For example, the result of 
 ;;; (sum-up-numbers-general ‘(a b 1 (2 c (3)) d)) should be 6.
 
-
+(define (sum-up-numbers-general L)
+  (cond
+    ; if L is empty list
+    ((null? L) '0)
+    ; if first element is list
+    ((list? (car L)) (sum-up-numbers-general(cdr L)))
+    ; if first element is not a number
+    ((not (number? (car L))) (sum-up-numbers-general(cdr L)))
+    ; calculate recursively
+    (else (+ (car L) (sum-up-numbers-general(cdr L)))
+          ))
+  )
