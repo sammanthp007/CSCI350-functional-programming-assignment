@@ -95,4 +95,32 @@
 ;;; the result is false (#F). For example, the result of 
 ;;; (min-above-min ‘(2 a 1 3) ‘(b 5 3 1)) should be 2.
 
+(define (min-above-min L1 L2)
+  (cond
+    ((null? l2) min_of (L1))
+    (else (cond
+            ((null? min_of ( greater_than (L1 (min_of L2)))) #f)
+            (else (min_of ( greater_than (L1 (min_of L2)))))
+            )
+     )
+  )
+)
 
+
+
+
+
+
+;;; returns the minimum number as an atom of the list
+(define (min_atm_of lis)
+  ; if the first atm is a number then 
+  (cond
+    ((null? (cdr lis)) (car lis)) 
+    ((not (number? (car lis))) (min_atm_of(cdr lis)))
+    ((< (car lis) (min_atm_of(cdr lis))) (car lis))
+    ; else return min from the remaining list
+    (else (min_atm_of(cdr lis)))
+  )
+)
+
+(min_atm_of '(10 12 3 4 22 4))
