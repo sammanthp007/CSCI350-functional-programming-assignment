@@ -67,10 +67,13 @@
     ; if L is empty list
     ((null? L) '0)
     ; if first element is list
-    ((list? (car L)) (sum-up-numbers-general(cdr L)))
+    ((list? (car L)) (+ (sum-up-numbers-general (car L)) (sum-up-numbers-general(cdr L))))
     ; if first element is not a number
     ((not (number? (car L))) (sum-up-numbers-general(cdr L)))
     ; calculate recursively
     (else (+ (car L) (sum-up-numbers-general(cdr L)))
           ))
   )
+
+(sum-up-numbers-general '(100 (200) (a) a b a c 200 (2)))
+(sum-up-numbers-general '((((3)))))
