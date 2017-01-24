@@ -95,18 +95,6 @@
 ;;; the result is false (#F). For example, the result of 
 ;;; (min-above-min ‘(2 a 1 3) ‘(b 5 3 1)) should be 2.
 
-(define (min-above-min L1 L2)
-  (cond
-    ((null? l2) min_of (L1))
-    (else (cond
-            ((null? min_of ( greater_than (L1 (min_of L2 '())))) #f)
-            (else (min_of ( greater_than (L1 (min_of L2 '())))))
-            )
-     )
-  )
-)
-
-
 (define (greater_than lis val output)
   (cond
     ; if car lis = null then do nothing
@@ -120,8 +108,6 @@
   )
 )
 
-(greater_than '(1 3 5 2 6 4) '10 '())
-
 ;;; returns the minimum number as an atom of the list
 (define (min_atm_of lis)
   ; if the first atm is a number then 
@@ -134,4 +120,16 @@
   )
 )
 
-;(min_atm_of '(10 12 3 4 22 4))
+
+(define (min-above-min L1 L2)
+  (cond
+    ((null? l2) min_of (L1))
+    (else (cond
+            ((null? (min_atm_of ( greater_than L1 (min_atm_of L2) '()))) #f)
+            (else (min_atm_of ( greater_than L1 (min_atm_of L2) '())))
+            )
+     )
+  )
+)
+
+(min-above-min '(2 4 3 5 6 4) '(4 5 6))
