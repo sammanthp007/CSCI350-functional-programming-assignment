@@ -110,13 +110,17 @@
 (define (greater_than lis val output)
   (cond
     ; if car lis = null then do nothing
-    ((null? (cdr lis)) (cons (car lis) output))
+    ((null? (cdr lis)) (if (> (car lis) val)
+                           (cons (car lis) output)
+                           output))
     ; if car lis > val then append to output
     ((> (car lis) val) (greater_than (cdr lis) val (cons (car lis) output)))
     ; if car lis <= val then do nothing
     (else (greater_than (cdr lis) val output))
   )
 )
+
+(greater_than '(1 3 5 2 6 4) '10 '())
 
 ;;; returns the minimum number as an atom of the list
 (define (min_atm_of lis)
@@ -130,4 +134,4 @@
   )
 )
 
-(min_atm_of '(10 12 3 4 22 4))
+;(min_atm_of '(10 12 3 4 22 4))
