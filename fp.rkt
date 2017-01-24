@@ -52,6 +52,7 @@
 ; (sum-up-numbers-simple '(100 (200)))
 ; (sum-up-numbers-simple '(a 100 b (200) c 300 d))
 ; 
-
+; (sum-up-numbers-simple '(100 (200) (a) a b a c 200 (2)))
+; (sum-up-numbers-simple '((((3)))))
 
 
