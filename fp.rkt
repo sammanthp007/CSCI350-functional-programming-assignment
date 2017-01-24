@@ -55,4 +55,10 @@
 ; (sum-up-numbers-simple '(100 (200) (a) a b a c 200 (2)))
 ; (sum-up-numbers-simple '((((3)))))
 
+;;; (25 pts) Write a function (sum-up-numbers-general L). L is a list, which 
+;;; may contain as elements numbers and non-numbers. The result of the function
+;;; is the sum of all the numbers (including those in nested lists) in L. If 
+;;; there are no such numbers, the result is zero. For example, the result of 
+;;; (sum-up-numbers-general ‘(a b 1 (2 c (3)) d)) should be 6.
+
 
