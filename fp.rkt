@@ -99,17 +99,24 @@
   (cond
     ((null? l2) min_of (L1))
     (else (cond
-            ((null? min_of ( greater_than (L1 (min_of L2)))) #f)
-            (else (min_of ( greater_than (L1 (min_of L2)))))
+            ((null? min_of ( greater_than (L1 (min_of L2 '())))) #f)
+            (else (min_of ( greater_than (L1 (min_of L2 '())))))
             )
      )
   )
 )
 
 
-
-
-
+(define (greater_than lis val output)
+  (cond
+    ; if car lis = null then do nothing
+    ((null? (cdr lis)) (cons (car lis) output))
+    ; if car lis > val then append to output
+    ((> (car lis) val) (greater_than (cdr lis) val (cons (car lis) output)))
+    ; if car lis <= val then do nothing
+    (else (greater_than (cdr lis) val output))
+  )
+)
 
 ;;; returns the minimum number as an atom of the list
 (define (min_atm_of lis)
