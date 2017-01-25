@@ -98,11 +98,11 @@
 (define (greater_than lis val output)
   (cond
     ; if car lis = null then do nothing
-    ((null? (cdr lis)) (if (> (car lis) val)
+    ((null? (cdr lis)) (if (and (number? (car lis)) (> (car lis) val))
                            (cons (car lis) output)
                            output))
     ; if car lis > val then append to output
-    ((> (car lis) val) (greater_than (cdr lis) val (cons (car lis) output)))
+    ((and (number? (car lis)) (> (car lis) val)) (greater_than (cdr lis) val (cons (car lis) output)))
     ; if car lis <= val then do nothing
     (else (greater_than (cdr lis) val output))
   )
@@ -112,8 +112,13 @@
 (define (min_atm_of lis)
   ; if the first atm is a number then 
   (cond
-    ((null? (cdr lis)) (car lis)) 
+    ; if lis is empty return empty 
+    ((null? lis) #f)
+    ; if (car lis) is not a number return min_atm_of(cdr lis) 
     ((not (number? (car lis))) (min_atm_of(cdr lis)))
+    ; if (car lis) is a number and if (min_atm_of_cdr lis) is empty list
+    ((and (number? (car lis)) (not (min_atm_of(cdr lis)))) (car lis))
+    ; if (car lis) is a number and car lis is less than everything else
     ((< (car lis) (min_atm_of(cdr lis))) (car lis))
     ; else return min from the remaining list
     (else (min_atm_of(cdr lis)))
@@ -123,8 +128,11 @@
 
 (define (min-above-min L1 L2)
   (cond
-    ((null? l2) min_of (L1))
+    ; If there is no number in L2, all the numbers in L1 should be used to calculate the minimum
+    ((null? L2) (min_atm_of L1))
+    ((null? L1) #f)
     (else (cond
+            ; if 
             ((null? (min_atm_of ( greater_than L1 (min_atm_of L2) '()))) #f)
             (else (min_atm_of ( greater_than L1 (min_atm_of L2) '())))
             )
@@ -132,4 +140,13 @@
   )
 )
 
-(min-above-min '(2 4 3 5 6 4) '(4 5 6))
+(min-above-min '() '(a 100 b 200 c 300 d))
+(min-above-min '(100) '())
+(min-above-min '(a 200 b 100 c 300 d)  '())
+(min-above-min '(a) '())
+(min-above-min '(a) '(a 200 b 300 c 100 d))
+(min-above-min '(a b c) '(a 200 b 300 c 100 d))
+(min-above-min '(a 200) '(a 200 b 300 c 100 d))
+(min-above-min '(a 100) '(a 200 b 300 c 100 d))
+(min-above-min '(100 200 300) '(300 100 200))
+(min-above-min '(a 300 b 100 c 200 d) '(a 200 b 300 c 100 d))
